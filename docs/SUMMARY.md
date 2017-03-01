@@ -54,4 +54,11 @@
 
 ----
 
+* [Middleware](capitulos/express_middleware/part1.md)
+    * [Introduccion Middleware](capitulos/express_middleware/part1.md)
+    * [Middleware de nivel de aplicación](capitulos/express_middleware/part2.md)
+    * [Middleware de nivel enrutador](capitulos/express_middleware/part3.md)
+    * [Middleware de gestión de errores](capitulos/express_middleware/part4.md)
+    * [Built-in middleware](capitulos/express_middleware/part5.md)
+    * [Middleware de terceros](capitulos/express_middleware/part6.md)
 
