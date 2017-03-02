@@ -8,17 +8,22 @@ Cada ruta puede tener una o más funciones del manejador, que se ejecutan cuando
 La estructura de como de define una ruta es la siguiente:
 
 *app.METHOD(PATH, HANDLER)*
-    **App es una instancia de express.**
-        ```javascript
+
+**App es una instancia de express.**
+    
+```javascript
         var app = express()
-        ```
-    **METHOD es un método de solicitud HTTP, en minúsculas.**
-    **PATH es una ruta de acceso en el servidor.**
-    **HANDLER es la función ejecutada cuando se compara la ruta.**
+```
+        
+**METHOD es un método de solicitud HTTP, en minúsculas.**
+    
+**PATH es una ruta de acceso en el servidor.**
+    
+**HANDLER es la función ejecutada cuando se compara la ruta.**
     
 ## Ejemplos Basic Routing
 
-> A continuación de ofrecen varios ejemplos de como se realizan las rutas 
+ A continuación de ofrecen varios ejemplos de como se realizan las rutas 
 con diferentes ejemplos:
 
 **Responde con un !Hello World! en la página principal**
