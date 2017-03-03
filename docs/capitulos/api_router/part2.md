@@ -1,6 +1,6 @@
 > ### Algunos Métodos
 
->  ### **router.all (camino, [de devolución de llamada, ...] devolución de llamada)**
+>  ###**router.all (camino, [de devolución de llamada, ...] devolución de llamada)**
 
 > Este método es igual que los router.METHOD()métodos, excepto que coincide con todos los métodos HTTP (verbos).
 Este método es muy útil para el mapeo lógico "global" para los prefijos de ruta específicas o partidos arbitrarias. 
@@ -35,6 +35,21 @@ expresiones regulares, que se utiliza internamente para que coincida con las pet
 se no cuenta a la hora de realizar estos partidos, por ejemplo "GET /" se correspondería con la siguiente ruta, como sería 
 "GET /? Name = tobi".
 
+> ```
+router.get('/', function(req, res){
+  res.send('hello world');
+});
+```
+> También puede utilizar expresiones útiles-regulares si tiene limitaciones muy específicas, 
+por ejemplo, lo siguiente sería igualar "GET / cometa / 71dbb9c", así como "GET /commits/71dbb9c..4c084f9".
+
+> ```
+router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+  var from = req.params[0];
+  var to = req.params[1] || 'HEAD';
+  res.send('commit range ' + from + '..' + to);
+});
+```
 
 > ***
 > ###**router.param (nombre, param_middleware)**
