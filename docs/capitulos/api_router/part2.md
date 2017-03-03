@@ -9,7 +9,7 @@ que todas las rutas desde ese punto en requerirían autenticación y cargar auto
 estas devoluciones de llamada no tienen que actuar como puntos finales; loadUser puede realizar una tarea, a continuación, 
 llamar next()a continuar búsqueda de rutas posteriores.
 
-> ```
+> ```javascript
 router.all('*', requireAuthentication, loadUser);
 //Tambien se puede poner asi
 router.all('*', requireAuthentication)
@@ -35,7 +35,7 @@ expresiones regulares, que se utiliza internamente para que coincida con las pet
 se no cuenta a la hora de realizar estos partidos, por ejemplo "GET /" se correspondería con la siguiente ruta, como sería 
 "GET /? Name = tobi".
 
-> ```
+> ```javascript
 router.get('/', function(req, res){
   res.send('hello world');
 });
@@ -43,7 +43,7 @@ router.get('/', function(req, res){
 > También puede utilizar expresiones útiles-regulares si tiene limitaciones muy específicas, 
 por ejemplo, lo siguiente sería igualar "GET / cometa / 71dbb9c", así como "GET /commits/71dbb9c..4c084f9".
 
-> ```
+> ```javascript
 router.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
@@ -69,7 +69,7 @@ Los parámetros de la función de devolución de llamada son:
 de posición normalizados. Por ejemplo, un : user_id parámetro podría cargar automáticamente la información de un usuario de la base de 
 datos sin ningún código adicional:
 
-> ```
+> ```javascript
 router.param('user', function(req, res, next, id) {
   // try to get the user details from the User model and attach it to the request object
   User.find(id, function(err, user) {
@@ -90,7 +90,7 @@ routers montados. Por lo tanto, las devoluciones de llamada param definidos en r
 definidos en routerlas rutas. Una devolución de llamada param será llamado sólo una vez en un ciclo de petición-respuesta, incluso si 
 el parámetro se corresponde en múltiples rutas, como se muestra en los siguientes ejemplos.
 
-> ```
+> ```javascript
 router.param('id', function (req, res, next, id) {
   console.log('CALLED ONLY ONCE');
   next();
@@ -121,7 +121,7 @@ los verbos HTTP con el middleware opcional. Utilizar router.route()para evitar l
 ruta duplicada y por lo tanto los errores de escritura. Basándose en el router.param()ejemplo 
 anterior, el código siguiente muestra cómo utilizar  router.route()para especificar varios manipuladores método HTTP.
 
-> ```
+> ```javascript
 var router = express.Router();
 router.param('user_id', function(req, res, next, id) {
   // sample user, would actually fetch from DB, etc...
@@ -161,7 +161,7 @@ router.route('/users/:user_id')
   comienzan a partir de la primera función de middleware definido y se abren 
   camino a la transformación pila de middleware "hacia abajo" para cada ruta que coinciden.
   
-> ```
+> ```javascript
 var express = require('express');
 var app = express();
 var router = express.Router();
@@ -189,7 +189,7 @@ Se invocan de forma secuencial, por tanto, el orden de precedencia define middle
 ejemplo, por lo general un registrador es el primer middleware que utilizaría, por lo que
 cada solicitud se registra.
 
-> ```
+> ```javascript
 var logger = require('morgan');
 router.use(logger());
 router.use(express.static(__dirname + '/public'));
@@ -203,7 +203,7 @@ para seguir las rutas de registro y middleware definidos después logger(). Sól
 que mover la llamada a express.static()la parte superior, antes de añadir el middleware 
 registrador:
 
-> ```
+> ```javascript
 router.use(express.static(__dirname + '/public'));
 router.use(logger());
 router.use(function(req, res){
@@ -212,7 +212,7 @@ router.use(function(req, res){
 ```
 > Otro ejemplo está sirviendo archivos de varios directorios, dando prioridad a "./public" sobre los demás:
 
-> ```
+> ```javascript
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
 app.use(express.static(__dirname + '/uploads'));
