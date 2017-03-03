@@ -1,6 +1,6 @@
 > ### Algunos Métodos
 
->  ###**router.all (camino, [de devolución de llamada, ...] devolución de llamada)**
+>  ### **router.all (camino, [de devolución de llamada, ...] devolución de llamada)**
 
 > Este método es igual que los router.METHOD()métodos, excepto que coincide con todos los métodos HTTP (verbos).
 Este método es muy útil para el mapeo lógico "global" para los prefijos de ruta específicas o partidos arbitrarias. 
@@ -9,20 +9,17 @@ que todas las rutas desde ese punto en requerirían autenticación y cargar auto
 estas devoluciones de llamada no tienen que actuar como puntos finales; loadUser puede realizar una tarea, a continuación, 
 llamar next()a continuar búsqueda de rutas posteriores.
 
-
-```
+> ```
 router.all('*', requireAuthentication, loadUser);
-
 //Tambien se puede poner asi
 router.all('*', requireAuthentication)
 router.all('*', loadUser);
-
 //Otro ejemplo.
 router.all('/api/*', requireAuthentication);
-
 ```
 
-> ###**router.METHOD (camino, [de devolución de llamada, ...] devolución de llamada)**
+> ***
+> ### **router.METHOD (camino, [de devolución de llamada, ...] devolución de llamada)**
 
 > Los router.METHOD()métodos proporcionan la funcionalidad de enrutamiento en Express, donde método es uno de los métodos HTTP, 
 como GET, PUT, POST, y así sucesivamente, en minúsculas. Por lo tanto, los métodos actuales son router.get(), router.post(), 
@@ -41,7 +38,8 @@ se no cuenta a la hora de realizar estos partidos, por ejemplo "GET /" se corres
 
 > ***
 > ###**router.param (nombre, param_middleware)**
-Asigna el parámetro de ruta especificada namea un middleware especializado param-captura.Esta función coloca el middleware en la
+
+> Asigna el parámetro de ruta especificada namea un middleware especializado param-captura.Esta función coloca el middleware en la
 misma pila que .use. Agrega devolución de llamada activa a parámetros de la ruta, donde namees el nombre del parámetro y callbackes 
 la función de devolución de llamada. Aunque nametécnicamente es opcional, utilizando este método sin ella está en desuso empezando 
 con expreso v4.11.0.
@@ -101,14 +99,15 @@ and this matches too
  ```
  
 > ***
-
 > ### **router.route (ruta)**
+
 > Devuelve una instancia de una sola ruta que luego se puede utilizar para manejar
 los verbos HTTP con el middleware opcional. Utilizar router.route()para evitar la nomenclatura 
 ruta duplicada y por lo tanto los errores de escritura. Basándose en el router.param()ejemplo 
 anterior, el código siguiente muestra cómo utilizar  router.route()para especificar varios manipuladores método HTTP.
 
-> ```var router = express.Router();
+> ```
+var router = express.Router();
 router.param('user_id', function(req, res, next, id) {
   // sample user, would actually fetch from DB, etc...
   req.user = {
@@ -174,6 +173,7 @@ app.listen(3000);
 Se invocan de forma secuencial, por tanto, el orden de precedencia define middleware.Por 
 ejemplo, por lo general un registrador es el primer middleware que utilizaría, por lo que
 cada solicitud se registra.
+
 > ```
 var logger = require('morgan');
 router.use(logger());
@@ -182,10 +182,12 @@ router.use(function(req, res){
   res.send('Hello');
 });
 ```
+
 > Ahora suponga que desea ignorar las solicitudes de registro de archivos estáticos, pero 
 para seguir las rutas de registro y middleware definidos después logger(). Sólo tendría 
 que mover la llamada a express.static()la parte superior, antes de añadir el middleware 
 registrador:
+
 > ```
 router.use(express.static(__dirname + '/public'));
 router.use(logger());
@@ -193,8 +195,8 @@ router.use(function(req, res){
   res.send('Hello');
 });
 ```
-
 > Otro ejemplo está sirviendo archivos de varios directorios, dando prioridad a "./public" sobre los demás:
+
 > ```
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/files'));
