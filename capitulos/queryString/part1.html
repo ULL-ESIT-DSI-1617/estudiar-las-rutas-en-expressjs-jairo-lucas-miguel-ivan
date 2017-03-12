@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Métodos · GitBook</title>
+        <title>Query String · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../cookies/part1.html" />
+    <link rel="next" href="part1.html" />
     
     
-    <link rel="prev" href="part1.html" />
+    <link rel="prev" href="../cookie_management/part1.html" />
     
 
     </head>
@@ -778,9 +778,9 @@
         
         
     
-        <li class="chapter " data-level="12.1" data-path="part1.html">
+        <li class="chapter " data-level="12.1" data-path="../api_router/part1.html">
             
-                <a href="part1.html">
+                <a href="../api_router/part1.html">
             
                     
                     Router API
@@ -792,9 +792,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="12.1.1" data-path="part1.html">
+        <li class="chapter " data-level="12.1.1" data-path="../api_router/part1.html">
             
-                <a href="part1.html">
+                <a href="../api_router/part1.html">
             
                     
                     ¿Qué es?
@@ -805,9 +805,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="12.1.2" data-path="part2.html">
+        <li class="chapter " data-level="12.1.2" data-path="../api_router/part2.html">
             
-                <a href="part2.html">
+                <a href="../api_router/part2.html">
             
                     
                     Métodos
@@ -921,9 +921,9 @@
         
         
     
-        <li class="chapter " data-level="15.1" data-path="../queryString/part1.html">
+        <li class="chapter active" data-level="15.1" data-path="part1.html">
             
-                <a href="../queryString/part1.html">
+                <a href="part1.html">
             
                     
                     Query String
@@ -935,9 +935,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="15.1.1" data-path="../queryString/part1.html">
+        <li class="chapter active" data-level="15.1.1" data-path="part1.html">
             
-                <a href="../queryString/part1.html">
+                <a href="part1.html">
             
                     
                     Query String
@@ -1126,7 +1126,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Métodos</a>
+        <a href="../.." >Query String</a>
     </h1>
 </div>
 
@@ -1142,190 +1142,79 @@
                                 <section class="normal markdown-section">
                                 
                                 <blockquote>
-<h3 id="algunos-m&#xE9;todos">Algunos M&#xE9;todos</h3>
-<h3 id="routerall-camino-de-devoluci&#xF3;n-de-llamada--devoluci&#xF3;n-de-llamada"><strong>router.all (camino, [de devoluci&#xF3;n de llamada, ...] devoluci&#xF3;n de llamada)</strong></h3>
-<p>Este m&#xE9;todo es igual que los router.METHOD()m&#xE9;todos, excepto que coincide con todos los m&#xE9;todos HTTP (verbos).
-Este m&#xE9;todo es muy &#xFA;til para el mapeo l&#xF3;gico &quot;global&quot; para los prefijos de ruta espec&#xED;ficas o partidos arbitrarias. 
-Por ejemplo, si se coloca la siguiente ruta en la parte superior de todas las otras definiciones de ruta, que requerir&#xED;a 
-que todas las rutas desde ese punto en requerir&#xED;an autenticaci&#xF3;n y cargar autom&#xE1;ticamente un usuario. Tenga en cuenta que 
-estas devoluciones de llamada no tienen que actuar como puntos finales; loadUser puede realizar una tarea, a continuaci&#xF3;n, 
-llamar next()a continuar b&#xFA;squeda de rutas posteriores.</p>
-<pre><code class="lang-javascript">router.all(<span class="hljs-string">&apos;*&apos;</span>, requireAuthentication, loadUser);
-<span class="hljs-comment">//Tambien se puede poner asi</span>
-router.all(<span class="hljs-string">&apos;*&apos;</span>, requireAuthentication)
-router.all(<span class="hljs-string">&apos;*&apos;</span>, loadUser);
-<span class="hljs-comment">//Otro ejemplo.</span>
-router.all(<span class="hljs-string">&apos;/api/*&apos;</span>, requireAuthentication);
-</code></pre>
-<hr>
-<h3 id="routermethod-camino-de-devoluci&#xF3;n-de-llamada--devoluci&#xF3;n-de-llamada"><strong>router.METHOD (camino, [de devoluci&#xF3;n de llamada, ...] devoluci&#xF3;n de llamada)</strong></h3>
-<p>Los router.METHOD()m&#xE9;todos proporcionan la funcionalidad de enrutamiento en Express, donde m&#xE9;todo es uno de los m&#xE9;todos HTTP, 
-como GET, PUT, POST, y as&#xED; sucesivamente, en min&#xFA;sculas. Por lo tanto, los m&#xE9;todos actuales son router.get(), router.post(), 
-router.put(), y as&#xED; sucesivamente.</p>
-<p>Puede proporcionar m&#xFA;ltiples servicios repetidos, y todos son tratados por igual, y se comportan igual que el middleware,
-excepto que estas devoluciones de llamada pueden invocar next(&apos;route&apos;) para eludir la devoluci&#xF3;n de llamada ruta restante (s).
-Puede utilizar este mecanismo para llevar a cabo precondiciones en una ruta a continuaci&#xF3;n,
-pasar el control a rutas posteriores, cuando no hay ninguna raz&#xF3;n para continuar con la ruta buscada.</p>
-<p>El siguiente fragmento ilustra posible la definici&#xF3;n de la ruta m&#xE1;s sencilla. Expresa traduce las cadenas de ruta a las 
-expresiones regulares, que se utiliza internamente para que coincida con las peticiones entrantes. Las cadenas de consulta
-se no cuenta a la hora de realizar estos partidos, por ejemplo &quot;GET /&quot; se corresponder&#xED;a con la siguiente ruta, como ser&#xED;a 
-&quot;GET /? Name = tobi&quot;.</p>
-<pre><code class="lang-javascript">router.get(<span class="hljs-string">&apos;/&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
-  res.send(<span class="hljs-string">&apos;hello world&apos;</span>);
-});
-</code></pre>
-<p>Tambi&#xE9;n puede utilizar expresiones &#xFA;tiles-regulares si tiene limitaciones muy espec&#xED;ficas, 
-por ejemplo, lo siguiente ser&#xED;a igualar &quot;GET / cometa / 71dbb9c&quot;, as&#xED; como &quot;GET /commits/71dbb9c..4c084f9&quot;.</p>
-<pre><code class="lang-javascript">router.get(<span class="hljs-regexp">/^\/commits\/(\w+)(?:\.\.(\w+))?$/</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
-  <span class="hljs-keyword">var</span> <span class="hljs-keyword">from</span> = req.params[<span class="hljs-number">0</span>];
-  <span class="hljs-keyword">var</span> to = req.params[<span class="hljs-number">1</span>] || <span class="hljs-string">&apos;HEAD&apos;</span>;
-  res.send(<span class="hljs-string">&apos;commit range &apos;</span> + <span class="hljs-keyword">from</span> + <span class="hljs-string">&apos;..&apos;</span> + to);
-});
-</code></pre>
-<hr>
-<h3 id="routerparam-nombre-parammiddleware"><strong>router.param (nombre, param_middleware)</strong></h3>
-<p>Asigna el par&#xE1;metro de ruta especificada namea un middleware especializado param-captura.Esta funci&#xF3;n coloca el middleware en la
-misma pila que .use. Agrega devoluci&#xF3;n de llamada activa a par&#xE1;metros de la ruta, donde namees el nombre del par&#xE1;metro y callbackes 
-la funci&#xF3;n de devoluci&#xF3;n de llamada. Aunque namet&#xE9;cnicamente es opcional, utilizando este m&#xE9;todo sin ella est&#xE1; en desuso empezando 
-con expreso v4.11.0.
-Los par&#xE1;metros de la funci&#xF3;n de devoluci&#xF3;n de llamada son:</p>
-<ul>
-<li>req, La solicitud de objeto.</li>
-<li>res, El objeto respuesta.</li>
-<li>next, Lo que indica la siguiente funci&#xF3;n de middleware.</li>
-<li>El valor del namepar&#xE1;metro.</li>
-<li>El nombre del par&#xE1;metro.</li>
-</ul>
-<p>Asignaci&#xF3;n de par&#xE1;metro se utiliza para proporcionar las condiciones previas a las rutas que utilizan marcadores 
-de posici&#xF3;n normalizados. Por ejemplo, un : user_id par&#xE1;metro podr&#xED;a cargar autom&#xE1;ticamente la informaci&#xF3;n de un usuario de la base de 
-datos sin ning&#xFA;n c&#xF3;digo adicional:</p>
-<pre><code class="lang-javascript">router.param(<span class="hljs-string">&apos;user&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next, id</span>) </span>{
-  <span class="hljs-comment">// try to get the user details from the User model and attach it to the request object</span>
-  User.find(id, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, user</span>) </span>{
-    <span class="hljs-keyword">if</span> (err) {
-      next(err);
-    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (user) {
-      req.user = user;
-      next();
-    } <span class="hljs-keyword">else</span> {
-      next(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;failed to load user&apos;</span>));
-    }
-  });
-});
-</code></pre>
-<p>Param funciones de devoluci&#xF3;n de llamada son locales al router en el que est&#xE1;n definidas. Ellos no son heredados por aplicaciones o
-routers montados. Por lo tanto, las devoluciones de llamada param definidos en routerse activar&#xE1;n solamente por par&#xE1;metros de ruta 
-definidos en routerlas rutas. Una devoluci&#xF3;n de llamada param ser&#xE1; llamado s&#xF3;lo una vez en un ciclo de petici&#xF3;n-respuesta, incluso si 
-el par&#xE1;metro se corresponde en m&#xFA;ltiples rutas, como se muestra en los siguientes ejemplos.</p>
-<pre><code class="lang-javascript">router.param(<span class="hljs-string">&apos;id&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next, id</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;CALLED ONLY ONCE&apos;</span>);
-  next();
-});
-router.get(<span class="hljs-string">&apos;/user/:id&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res, next</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;although this matches&apos;</span>);
-  next();
-});
-router.get(<span class="hljs-string">&apos;/user/:id&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;and this matches too&apos;</span>);
-  res.end();
-});
-</code></pre>
-<p>En GET /user/42, se imprime la siguiente:</p>
-<pre><code>CALLED ONLY ONCE
-although this matches
-and this matches too
-</code></pre><hr>
-<h3 id="routerroute-ruta"><strong>router.route (ruta)</strong></h3>
-<p>Devuelve una instancia de una sola ruta que luego se puede utilizar para manejar
-los verbos HTTP con el middleware opcional. Utilizar router.route()para evitar la nomenclatura 
-ruta duplicada y por lo tanto los errores de escritura. Bas&#xE1;ndose en el router.param()ejemplo 
-anterior, el c&#xF3;digo siguiente muestra c&#xF3;mo utilizar  router.route()para especificar varios manipuladores m&#xE9;todo HTTP.</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> router = express.Router();
-router.param(<span class="hljs-string">&apos;user_id&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next, id</span>) </span>{
-  <span class="hljs-comment">// sample user, would actually fetch from DB, etc...</span>
-  req.user = {
-    id: id,
-    name: <span class="hljs-string">&apos;TJ&apos;</span>
-  };
-  next();
-});
-router.route(<span class="hljs-string">&apos;/users/:user_id&apos;</span>)
-.all(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  <span class="hljs-comment">// runs for all HTTP verbs first</span>
-  <span class="hljs-comment">// think of it as route specific middleware!</span>
-  next();
-})
-.get(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  res.json(req.user);
-})
-.put(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  <span class="hljs-comment">// just an example of maybe updating the user</span>
-  req.user.name = req.params.name;
-  <span class="hljs-comment">// save user ... etc</span>
-  res.json(req.user);
-})
-.post(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  next(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;not implemented&apos;</span>));
-})
-.delete(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  next(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;not implemented&apos;</span>));
-});
-</code></pre>
-<p>Utiliza la funci&#xF3;n especificada middleware o funciones, con la ruta de montaje 
-  opcional path, que por defecto es &quot;/&quot;. Este m&#xE9;todo es similar a app.use () . 
-  Un ejemplo sencillo y el uso caso se describe a continuaci&#xF3;n. Ver app.use () para 
-  obtener m&#xE1;s informaci&#xF3;n. Middleware es como un tubo de fontaner&#xED;a: peticiones 
-  comienzan a partir de la primera funci&#xF3;n de middleware definido y se abren 
-  camino a la transformaci&#xF3;n pila de middleware &quot;hacia abajo&quot; para cada ruta que coinciden.</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;express&apos;</span>);
-<span class="hljs-keyword">var</span> app = express();
-<span class="hljs-keyword">var</span> router = express.Router();
-<span class="hljs-comment">// simple logger for this router&apos;s requests</span>
-<span class="hljs-comment">// all requests to this router will first hit this middleware</span>
-router.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;%s %s %s&apos;</span>, req.method, req.url, req.path);
-  next();
-});
-<span class="hljs-comment">// this will only be invoked if the path starts with /bar from the mount point</span>
-router.use(<span class="hljs-string">&apos;/bar&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  <span class="hljs-comment">// ... maybe some additional /bar logging ...</span>
-  next();
-});
-<span class="hljs-comment">// always invoked</span>
-router.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res, next</span>) </span>{
-  res.send(<span class="hljs-string">&apos;Hello World&apos;</span>);
-});
-app.use(<span class="hljs-string">&apos;/foo&apos;</span>, router);
-app.listen(<span class="hljs-number">3000</span>);
-</code></pre>
-<p>El orden en el que se define con el middleware router.use()es muy importante. 
-Se invocan de forma secuencial, por tanto, el orden de precedencia define middleware.Por 
-ejemplo, por lo general un registrador es el primer middleware que utilizar&#xED;a, por lo que
-cada solicitud se registra.</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;morgan&apos;</span>);
-router.use(logger());
-router.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
-router.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
-  res.send(<span class="hljs-string">&apos;Hello&apos;</span>);
-});
-</code></pre>
-<p>Ahora suponga que desea ignorar las solicitudes de registro de archivos est&#xE1;ticos, pero 
-para seguir las rutas de registro y middleware definidos despu&#xE9;s logger(). S&#xF3;lo tendr&#xED;a 
-que mover la llamada a express.static()la parte superior, antes de a&#xF1;adir el middleware 
-registrador:</p>
-<pre><code class="lang-javascript">router.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
-router.use(logger());
-router.use(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>)</span>{
-  res.send(<span class="hljs-string">&apos;Hello&apos;</span>);
-});
-</code></pre>
-<p>Otro ejemplo est&#xE1; sirviendo archivos de varios directorios, dando prioridad a &quot;./public&quot; sobre los dem&#xE1;s:</p>
-<pre><code class="lang-javascript">app.use(express.static(__dirname + <span class="hljs-string">&apos;/public&apos;</span>));
-app.use(express.static(__dirname + <span class="hljs-string">&apos;/files&apos;</span>));
-app.use(express.static(__dirname + <span class="hljs-string">&apos;/uploads&apos;</span>));
-</code></pre>
-<p>El router.use()m&#xE9;todo tambi&#xE9;n es compatible con los par&#xE1;metros nombrado para que 
-sus puntos de montaje para otros routers pueden beneficiarse de precarga utilizando los par&#xE1;metros con nombre.</p>
+<h2 id="introducci&#xF3;n">Introducci&#xF3;n</h2>
+<p>En la World Wide Web , una query string es la parte de un localizador uniforme de recursos (URL) 
+que contiene datos que no encaja convenientemente en una estructura jer&#xE1;rquica de la ruta. La cadena de
+consulta incluye campos a&#xF1;adidos com&#xFA;nmente a una URL base mediante un navegador Web u otra aplicaci&#xF3;n cliente, 
+por ejemplo, como parte de un formulario HTML.</p>
+<h2 id="estructura">Estructura</h2>
+<p>Una URL t&#xED;pica que contiene una cadena de consulta es la siguiente:</p>
+<pre><code>http://example.com/over/there?name=ferret
+</code></pre><p>Cuando un servidor recibe una solicitud de una p&#xE1;gina tal, puede ejecutar 
+un programa, pasando la cadena de consulta, que en este caso es, name=ferret sin
+cambios, al programa. El primer signo de interrogaci&#xF3;n se utiliza como separador,
+y no es parte de la cadena de consulta.</p>
+<p>Un enlace en una p&#xE1;gina web puede tener una direcci&#xF3;n URL que contiene una cadena 
+de consulta. HTML define tres formas en que un agente de usuario puede generar la 
+cadena de consulta:</p>
+<p><em>un formulario HTML a trav&#xE9;s del <code>&lt;form&gt;...&lt;/form&gt;</code></em></p>
+<p><em>elemento un mapa de imagen  del servidor a trav&#xE9;s del  ismapatributo en el <code>&lt;img&gt;</code> </em>
+<em>elemento con una <code>&lt;imgismap&gt;</code>construcci&#xF3;n de b&#xFA;squeda indexada que est&#xE1; en desuso <code>&lt;isindex&gt;</code></em></p>
+<h2 id="formulario-html">Formulario HTML</h2>
+<p>Cuando un formulario contiene los campos field1, field2, field3, el 
+contenido de los campos se codifica como una cadena de consulta de la 
+siguiente manera:</p>
+<pre><code>field1=value1&amp;field2=value2&amp;field3=value3
+</code></pre><p>La cadena de consulta se compone de una serie de pares de campos de valor.
+Dentro de cada par, el nombre del campo y el valor est&#xE1;n separados por un 
+signo de igual , &apos; =&apos;.
+La serie de pares se separa por el s&#xED;mbolo de uni&#xF3;n , &apos; &amp;&apos; (o punto y coma , &apos; ;&apos; 
+para las URL incrustadas en HTML y no generados por una <code>&lt;form&gt;...&lt;/form&gt;</code>
+Aunque no existe una norma definitiva, la mayor&#xED;a de los marcos de web permiten m&#xFA;ltiples 
+valores a estar asociados con un solo campo (por ejemplo field1=value1&amp;field1=value2&amp;field2=value3)</p>
+<h2 id="ejemplo">Ejemplo</h2>
+<p>Si un formulario est&#xE1; incrustado en un HTML p&#xE1;gina de la siguiente manera:</p>
+<pre><code>&lt;form action=&quot;cgi-bin/test.cgi&quot; method=&quot;get&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;first&quot; /&gt;
+  &lt;input type=&quot;text&quot; name=&quot;second&quot; /&gt;
+  &lt;input type=&quot;submit&quot; /&gt;
+&lt;/form&gt;
+</code></pre><p>y el usuario inserta las cadenas &#x201C;this is a field&#x201D; y &#x201C;was it clear (already)?&#x201D; en los dos campos de texto 
+y presiona el bot&#xF3;n de enviar, el programa test.cgi(el programa especificado por el atributo action del 
+formulario en el ejemplo anterior)
+recibir&#xE1; la siguiente cadena de consulta:</p>
+<pre><code>first=this+is+a+field&amp;second=was+it+clear+%28already%29%3F
+</code></pre><p>Si el formulario se procesa en el servidor por un CGI script de , el gui&#xF3;n puede recibir normalmente la cadena
+de consulta como una variable de entorno llamada QUERY_STRING.</p>
+<h2 id="seguimiento">Seguimiento</h2>
+<p>Un programa que recibe una cadena de consulta puede ignorar la totalidad o parte de la misma. Si la URL solicitada corresponde a un 
+archivo y no a un programa, toda la cadena de consulta se ignora. Sin embargo, independientemente de si se utiliza la cadena de consulta 
+o no, toda la URL incluyendo &#xE9;ste se almacena en el servidor de archivos de registro .</p>
+<p>Estos hechos permiten que las cadenas de consulta que se utilizan para realizar un seguimiento de los usuarios de una manera similar a
+la proporcionada por cookies HTTP . Para que esto funcione, cada vez que el usuario descarga una p&#xE1;gina, un identificador &#xFA;nico debe ser 
+elegido y se agrega como una cadena de consulta a las direcciones URL de todos los enlaces de la p&#xE1;gina contiene. Tan pronto como el usuario
+siga uno de estos enlaces, se solicita la URL correspondiente al servidor. De esta manera, la descarga de esta p&#xE1;gina est&#xE1; vinculada con la anterior.</p>
+<p>Por ejemplo, cuando se solicita una p&#xE1;gina web que contiene lo siguiente:</p>
+<pre><code> &lt; Un  href = &quot;foo.html&quot; &gt; ver a mi p&#xE1;gina! &lt;/ A &gt; 
+ &lt; un  href = &quot;bar.html&quot; &gt; la m&#xED;a es mejor &lt;/ a &gt;
+</code></pre><p>una cadena &#xFA;nica, tal como e0a72cb2a2c7se elige, y la p&#xE1;gina se modifica de la siguiente manera:</p>
+<pre><code> &lt; Un  href = &quot;foo.html? E0a72cb2a2c7&quot; &gt; ver a mi p&#xE1;gina! &lt;/ A &gt; 
+ &lt; un  href = &quot;bar.html? E0a72cb2a2c7&quot; &gt; la m&#xED;a es mejor &lt;/ a &gt;
+</code></pre><p>La adici&#xF3;n de la cadena de consulta no cambia la forma en que la p&#xE1;gina se muestra al usuario. 
+Cuando el usuario sigue, por ejemplo, el primer enlace, el navegador solicita la p&#xE1;gina foo.html?e0a72cb2a2c7al servidor,
+que ignora lo que sigue ?y env&#xED;a la p&#xE1;gina foo.htmlcomo se esperaba, la adici&#xF3;n de la cadena de consulta para sus enlaces tambi&#xE9;n.</p>
+<p>De esta manera, cualquier solicitud de p&#xE1;gina posterior de este usuario llevar&#xE1; a la misma cadena de consulta e0a72cb2a2c7, 
+por lo que es posible establecer que todas estas p&#xE1;ginas han sido vistos por el mismo usuario. Las cadenas de consulta se utilizan
+a menudo en asociaci&#xF3;n con contadores de visitantes .</p>
+<p>Las principales diferencias entre las cadenas de consulta utilizados para el seguimiento y cookies HTTP son las siguientes:</p>
+<p>Las cadenas de consulta forman parte de la URL, y por lo tanto se incluyen si el usuario guarda o env&#xED;a la URL a otro usuario; las 
+cookies pueden ser mantenidos a trav&#xE9;s de sesiones de navegaci&#xF3;n, pero no se guardan o se env&#xED;an a la URL.
+Si el usuario llega al mismo servidor web por dos (o m&#xE1;s) caminos independientes, se le asignar&#xE1; dos cadenas de consulta diferentes, 
+mientras que las cookies almacenadas son los mismos.
+El usuario puede desactivar las cookies, en cuyo caso el uso de cookies para el seguimiento no funciona. Sin embargo, utilizando las 
+cadenas de consulta para el seguimiento deben trabajar en todas las situaciones.
+Diferentes cadenas de consulta aprobadas por diferentes visitas a la p&#xE1;gina significar&#xE1;n que las p&#xE1;ginas no se sirven desde el navegador
+(o proxy, si est&#xE1; presente) cach&#xE9; aumenta la carga en el servidor web y ralentizar la experiencia del usuario.</p>
 </blockquote>
 
                                 
@@ -1354,12 +1243,12 @@ sus puntos de montaje para otros routers pueden beneficiarse de precarga utiliza
 
             
                 
-                <a href="part1.html" class="navigation navigation-prev " aria-label="Previous page: ¿Qué es?">
+                <a href="../cookie_management/part1.html" class="navigation navigation-prev " aria-label="Previous page: Cookie Management">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../cookies/part1.html" class="navigation navigation-next " aria-label="Next page: Cookie">
+                <a href="part1.html" class="navigation navigation-next " aria-label="Next page: Query String">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1370,7 +1259,7 @@ sus puntos de montaje para otros routers pueden beneficiarse de precarga utiliza
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Métodos","level":"12.1.2","depth":2,"next":{"title":"Cookie","level":"13.1","depth":1,"path":"capitulos/cookies/part1.md","ref":"capitulos/cookies/part1.md","articles":[{"title":"Cookie","level":"13.1.1","depth":2,"path":"capitulos/cookies/part1.md","ref":"capitulos/cookies/part1.md","articles":[]},{"title":"Inspector de Almacenamiento","level":"13.1.2","depth":2,"path":"capitulos/cookies/part2.md","ref":"capitulos/cookies/part2.md","articles":[]}]},"previous":{"title":"¿Qué es?","level":"12.1.1","depth":2,"path":"capitulos/api_router/part1.md","ref":"capitulos/api_router/part1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulos/api_router/part2.md","mtime":"2017-03-12T19:08:48.752Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-12T19:18:31.327Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Query String","level":"15.1","depth":1,"next":{"title":"Query String","level":"15.1.1","depth":2,"path":"capitulos/queryString/part1.md","ref":"capitulos/queryString/part1.md","articles":[]},"previous":{"title":"Cookie Management","level":"14.1.1","depth":2,"path":"capitulos/cookie_management/part1.md","ref":"capitulos/cookie_management/part1.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulos/queryString/part1.md","mtime":"2017-03-12T19:08:48.756Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-12T19:18:31.327Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
